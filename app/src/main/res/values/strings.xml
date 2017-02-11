@@ -9,4 +9,7 @@
     <string name="b_yes">Да</string>
     <string name="b_no">Нет</string>
     <string name="vibor">Нашли битый пиксель?</string>
+    <string name="Vibor_express">Экспресс-тест</string>
+    <string name="Vibor_viborochniy">Выборочный</string>
+
 </resources>
