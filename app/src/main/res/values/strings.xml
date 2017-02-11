@@ -3,4 +3,10 @@
 
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="title_activity_screen_test">ScreenTestActivity</string>
+    <string name="touch">Касайся экрана</string>
+    <string name="b_yes">Да</string>
+    <string name="b_no">Нет</string>
+    <string name="vibor">Нашли битый пиксель?</string>
 </resources>
