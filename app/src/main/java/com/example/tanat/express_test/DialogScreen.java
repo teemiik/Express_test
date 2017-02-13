@@ -14,7 +14,7 @@ public class DialogScreen extends DialogFragment {
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder adb = new AlertDialog.Builder(getActivity())
-                .setTitle("Title!").setPositiveButton(R.string.b_yes, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.b_yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         ((ScreenTestActivity) getActivity()).okClicked();
                     }
