@@ -37,22 +37,6 @@
             android:orientation="horizontal"
             tools:ignore="UselessParent">
 
-            <Button
-                android:id="@+id/b_yes"
-                style="@android:style/Widget.Button.Small"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.50"
-                android:text="@string/b_yes" />
-
-            <Button
-                android:text="@string/b_no"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/b_no"
-                android:layout_weight="0.50"
-                style="@android:style/Widget.Button.Small" />
-
         </LinearLayout>
 
     </FrameLayout>
