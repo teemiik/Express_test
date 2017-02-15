@@ -3,6 +3,7 @@ package com.example.tanat.express_test;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
@@ -16,7 +17,8 @@ public class DialogScreen extends DialogFragment {
         AlertDialog.Builder adb = new AlertDialog.Builder(getActivity())
                 .setPositiveButton(R.string.b_yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        ((ScreenTestActivity) getActivity()).okClicked();
+                       // ((TouchScreenTest) getActivity()).okClicked();
+
                     }
                 })
                 .setNegativeButton(R.string.b_no, new DialogInterface.OnClickListener() {
@@ -28,3 +30,4 @@ public class DialogScreen extends DialogFragment {
         return adb.create();
     }
 }
+
