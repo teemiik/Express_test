@@ -137,11 +137,13 @@ public class ScreenTestActivity extends AppCompatActivity implements View.OnClic
     public void okClicked() {
         Intent intent = new Intent(this, TouchScreenTest.class);
         startActivity(intent);
+        finish();
     }
 
     public void cancelClicked() {
         Intent intent = new Intent(this, TouchScreenTest.class);
         startActivity(intent);
+        finish();
     }
 
     public void neutralClicked() {
