@@ -13,4 +13,7 @@
     <string name="Vibor_viborochniy">Выборочный</string>
     <string name="b_nuetral">Попробовать ещё</string>
 
+    <string name="title_activity_touch_screen_test">TouchScreenTest</string>
+    <string name="tt_instructions">Проведите по экрану для тестирования устройства. Для окончания теста нажмите дважды по экрану</string>
+
 </resources>
