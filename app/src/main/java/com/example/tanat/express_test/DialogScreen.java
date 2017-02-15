@@ -26,6 +26,11 @@ public class DialogScreen extends DialogFragment {
                         ((ScreenTestActivity) getActivity()).cancelClicked();
                     }
                 })
+                .setNeutralButton(R.string.b_nuetral, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        ((ScreenTestActivity) getActivity()).neutralClicked();
+                    }
+                })
                 .setMessage(R.string.vibor);
         return adb.create();
     }

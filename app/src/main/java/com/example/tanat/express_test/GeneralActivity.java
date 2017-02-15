@@ -28,5 +28,7 @@ public class GeneralActivity extends AppCompatActivity implements View.OnClickLi
             startActivity(intent);
         }
     }
+
+
 }
 

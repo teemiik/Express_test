@@ -1,6 +1,7 @@
 package com.example.tanat.express_test;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.DialogFragment;
@@ -124,12 +125,13 @@ public class ScreenTestActivity extends AppCompatActivity implements View.OnClic
         } else if (vColor.getColor() == ContextCompat.getColor(getApplicationContext(), R.color.blue)) {
             v.setBackgroundResource(R.color.gray);
         } else if (vColor.getColor() == ContextCompat.getColor(getApplicationContext(), R.color.gray)) {
+            v.setBackgroundResource(R.color.white);
+        } else if (vColor.getColor() == ContextCompat.getColor(getApplicationContext(), R.color.white)) {
             v.setBackgroundResource(R.color.black);
         }
         else {
             dialogScreen.show(getSupportFragmentManager(), DIALOG);
         }
-
     }
 
     public void okClicked() {
@@ -138,5 +140,10 @@ public class ScreenTestActivity extends AppCompatActivity implements View.OnClic
 
     public void cancelClicked() {
         boolean i = false;
+    }
+
+    public void neutralClicked() {
+        hide();
+        mContentView.setBackgroundResource(R.color.red);
     }
 }
