@@ -17,7 +17,7 @@ public class DialogScreen extends DialogFragment {
         AlertDialog.Builder adb = new AlertDialog.Builder(getActivity())
                 .setPositiveButton(R.string.b_yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                       // ((TouchScreenTest) getActivity()).okClicked();g
+                        ((ScreenTestActivity) getActivity()).okClicked();
 
                     }
                 })
