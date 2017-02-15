@@ -7,8 +7,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.net.Uri;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,8 +31,6 @@ public class TouchScreenTest extends AppCompatActivity {
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler();
     private View mContentView;
-    private final String DIALOG = "dialog";
-    DialogFragment dialogScreen;
 
 
     private final Runnable mHidePart2Runnable = new Runnable() {
@@ -78,15 +74,12 @@ public class TouchScreenTest extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        dialogScreen = new DialogScreen();
-
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(activity_touch_screen_test);
 
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content);
 
-        //mContentView.setOnClickListener(this);
 
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
@@ -126,19 +119,7 @@ public class TouchScreenTest extends AppCompatActivity {
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
 
-
-    public void okClicked() {
-        boolean i = true;
-    }
-
-    public void cancelClicked() {
-        boolean i = false;
-    }
-
-
 }
-
-
 
 class TouchView extends View {
 
