@@ -15,5 +15,9 @@
 
     <string name="title_activity_touch_screen_test">TouchScreenTest</string>
     <string name="tt_instructions">Проведите по экрану для тестирования устройства. Для окончания теста нажмите дважды по экрану</string>
+    <string name="interfaces">Проверка интерфейсов</string>
+    <string name="wi_fi">Проверка wi-fi....</string>
+    <string name="bluetoth">Проверка bluetoth...</string>
+    <string name="glonas">Проверка Глонасс...</string>
 
 </resources>
