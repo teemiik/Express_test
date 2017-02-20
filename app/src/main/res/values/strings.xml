@@ -19,5 +19,9 @@
     <string name="wi_fi">Проверка wi-fi....</string>
     <string name="bluetoth">Проверка bluetoth...</string>
     <string name="glonas">Проверка Глонасс...</string>
+    <string name="wifi_on">Wifi работает</string>
+    <string name="wifi_off">Wifi не работает</string>
+    <string name="bluet_on">Bluetooth работает</string>
+    <string name="bluet_off">Bluetooth не работает</string>
 
 </resources>
