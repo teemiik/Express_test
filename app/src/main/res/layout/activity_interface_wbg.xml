@@ -21,15 +21,6 @@
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:text="@string/interfaces"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
         android:text="@string/glonas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -46,5 +37,41 @@
         android:id="@+id/t_bluetoth"
         android:layout_below="@+id/t_wi_fi"
         android:layout_alignStart="@+id/t_wi_fi" />
+
+    <TextView
+        android:text="@string/interfaces"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="34dp"
+        android:id="@+id/textView"
+        android:layout_below="@+id/tvEnabledGPS"
+        android:layout_alignStart="@+id/t_wi_fi" />
+
+    <TextView
+        android:text="GPS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/t_glonass"
+        android:layout_alignStart="@+id/t_glonass"
+        android:layout_marginTop="16dp"
+        android:id="@+id/tvGPS" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvGPS"
+        android:layout_alignStart="@+id/tvGPS"
+        android:layout_marginTop="37dp"
+        android:id="@+id/tvDBM" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvDBM"
+        android:layout_alignEnd="@+id/tvDBM"
+        android:layout_marginTop="25dp"
+        android:id="@+id/tvNetworkType" />
 
 </RelativeLayout>
