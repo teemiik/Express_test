@@ -23,10 +23,5 @@
     <string name="wifi_off">Wifi не работает</string>
     <string name="bluet_on">Bluetooth работает</string>
     <string name="bluet_off">Bluetooth не работает</string>
-    <string name="provider_gps">GPS</string>
-    <string name="provider_network">Network</string>
-    <string name="location_settings">Location settings</string>
-
-
 
 </resources>
