@@ -13,8 +13,8 @@ import java.util.List;
 public class SensorATB extends AppCompatActivity {
     private SensorManager sensorManager;
     private List<Sensor> sensorList;
-    private float p_light = -1, p_prox = -1, p_press = -1, p_temp = -1;
-    private boolean light = false, prox = false, press = false, temp = false;
+    private float p_light = -1, p_prox = -1;
+    private boolean light = false, prox = false;
     Sensor v_sensor;
     TextView t_light, t_PROXIMITY, t_PRESSURE, t_AMBIENT_TEMPERATURE;
 
