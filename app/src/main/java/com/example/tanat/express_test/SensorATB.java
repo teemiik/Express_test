@@ -13,6 +13,8 @@ import java.util.List;
 public class SensorATB extends AppCompatActivity {
     private SensorManager sensorManager;
     private List<Sensor> sensorList;
+    private float p_light = -1, p_prox = -1, p_press = -1, p_temp = -1;
+    private boolean light = false, prox = false, press = false, temp = false;
     Sensor v_sensor;
     TextView t_light, t_PROXIMITY, t_PRESSURE, t_AMBIENT_TEMPERATURE;
 
@@ -62,6 +64,7 @@ public class SensorATB extends AppCompatActivity {
         sensorManager.unregisterListener(listenerSensorAmbient, v_sensor);
     }
 
+    //свет
     SensorEventListener listenerSensorLight = new SensorEventListener() {
 
         @Override
@@ -70,10 +73,26 @@ public class SensorATB extends AppCompatActivity {
 
         @Override
         public void onSensorChanged(SensorEvent event) {
-            t_light.setText(String.valueOf(event.values[0]));
+            //t_light.setText(String.valueOf(event.values[0]));
+
+            //проверять только при включенном освещении
+            //записываем первое значение
+            p_light = (p_light == -1) ? event.values[0] : p_light;
+
+            //проверяем значение приближения, после закрытия датчика рукой
+            if (light) {
+                light = ((p_light - event.values[0]) != 0);
+
+                // работает или нет
+                if (!light) t_light.setText("Датчик не работает");
+                else  t_light.setText(String.valueOf(light));
+
+            } else if (light) t_light.setText(String.valueOf(light));
+            else if (!light) t_light.setText("Нет данных");
         }
     };
 
+    //приближение
     SensorEventListener listenerSensorProximity = new SensorEventListener() {
 
         @Override
@@ -82,10 +101,26 @@ public class SensorATB extends AppCompatActivity {
 
         @Override
         public void onSensorChanged(SensorEvent event) {
-            t_PROXIMITY.setText(String.valueOf(event.values[0]));
+            //t_PROXIMITY.setText(String.valueOf(event.values[0]));
+            //первое значение
+            p_prox = (p_light == -1) ? event.values[0] : p_light;
+
+            //начинать тест ничем не прикрывая датчик
+            //проверка близости руки
+            if (event.values[0] == 0) {
+                light = true;
+                prox = ((p_prox - event.values[0]) > 0);
+
+                // работает или нет
+                if (!prox) t_PROXIMITY.setText("Датчик не работает");
+                else t_PROXIMITY.setText(String.valueOf(prox));
+
+            } else if (prox) {t_PROXIMITY.setText(String.valueOf(true));
+            } else if (!prox) {t_PROXIMITY.setText("Нет данных");}
         }
     };
 
+    //давление
     SensorEventListener listenerSensorPressure = new SensorEventListener() {
 
         @Override
@@ -94,10 +129,14 @@ public class SensorATB extends AppCompatActivity {
 
         @Override
         public void onSensorChanged(SensorEvent event) {
-            t_PRESSURE.setText(String.valueOf(event.values[0]));
+
+            //меньше нуля может быть наверное только под землей, так что я думаю и так норм
+            if (event.values[0] > 0) t_PRESSURE.setText(String.valueOf(true));
+            else t_PRESSURE.setText("Датчик не работает");
         }
     };
 
+    //температура
     SensorEventListener listenerSensorAmbient = new SensorEventListener() {
 
         @Override
