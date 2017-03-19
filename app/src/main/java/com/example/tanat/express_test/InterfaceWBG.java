@@ -33,7 +33,7 @@ public class InterfaceWBG extends AppCompatActivity {
     WifiInfo wifiInfo;
     TextView t_wifi, t_bluetoth, tvGPS,tvDBM,tvNetworkType;
     BluetoothAdapter bluetooth;
-    int signal_s, signal_a = 0;
+    int signal_s, signal_a = 0, col_web = 0;
     String b_address;
     TelephonyManager mTelephonyManager;
     CarrierConfigManager mTelephonyManager2;
@@ -109,6 +109,9 @@ public class InterfaceWBG extends AppCompatActivity {
                     }
                 }
             }
+
+            //количество найденных сетей
+            col_web = results.size();
 
             t_wifi.setText(R.string.wifi_on);
             wifiManager.setWifiEnabled(false);
