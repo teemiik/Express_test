@@ -115,8 +115,8 @@ public class SensorATB extends AppCompatActivity {
                 if (!prox) t_PROXIMITY.setText("Датчик не работает");
                 else t_PROXIMITY.setText(String.valueOf(prox));
 
-            } else if (prox) {t_PROXIMITY.setText(String.valueOf(true));
-            } else if (!prox) {t_PROXIMITY.setText("Нет данных");}
+            } else if (prox) t_PROXIMITY.setText(String.valueOf(true));
+            else if (!prox) t_PROXIMITY.setText("Нет данных");
         }
     };
 
