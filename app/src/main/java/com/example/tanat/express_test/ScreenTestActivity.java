@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
+import java.util.HashMap;
+
 
 public class ScreenTestActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -24,6 +26,7 @@ public class ScreenTestActivity extends AppCompatActivity implements View.OnClic
     private View mContentView;
     private final String DIALOG = "dialog";
     DialogFragment dialogScreen;
+    HashMap<String, Boolean> in_report;
 
 
     private final Runnable mHidePart2Runnable = new Runnable() {
@@ -76,6 +79,8 @@ public class ScreenTestActivity extends AppCompatActivity implements View.OnClic
         mContentView = findViewById(R.id.fullscreen_content);
 
         mContentView.setOnClickListener(this);
+
+        in_report = new HashMap<>();
 
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
@@ -135,9 +140,9 @@ public class ScreenTestActivity extends AppCompatActivity implements View.OnClic
     }
 
     public void okClicked() {
-        Intent intent = new Intent(this, InterfaceWBG.class);
-        startActivity(intent);
-        finish();
+        in_report.put("Битые_пиксели", true);
+        in_report.put("Небитые_пиксели", false);
+        GeneralActivity.recordReport(in_report);
     }
 
     public void cancelClicked() {

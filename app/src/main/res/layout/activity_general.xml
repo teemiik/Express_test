@@ -15,9 +15,9 @@
         android:layout_width="300dp"
         android:layout_height="100dp"
         android:id="@+id/vibor_viborochniy"
-        android:layout_marginTop="118dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp" />
 
     <Button
         android:text="@string/Vibor_express"
@@ -27,5 +27,14 @@
         android:layout_marginTop="56dp"
         android:layout_below="@+id/vibor_viborochniy"
         android:layout_alignStart="@+id/vibor_viborochniy" />
+
+    <Button
+        android:id="@+id/b_report"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/vibor_express"
+        android:layout_marginBottom="45dp"
+        android:text="Отчет" />
 
 </RelativeLayout>
