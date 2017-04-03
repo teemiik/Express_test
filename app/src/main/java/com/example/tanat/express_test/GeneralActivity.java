@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -57,12 +58,16 @@ public class GeneralActivity extends AppCompatActivity implements View.OnClickLi
             }
             File file_report = new File(folder, file_name);
             file_report.createNewFile();
-            FileOutputStream outputStream = new FileOutputStream(file_report, true);
-            for (HashMap.Entry value : set_values) {
-                text = String.valueOf(value.getKey()) + " | " + String.valueOf(value.getValue() + "\n");
-                outputStream.write(text.getBytes());
+            try  (FileOutputStream outputStream = new FileOutputStream(file_report, true)) {
+                for (HashMap.Entry value : set_values) {
+                    text = String.valueOf(value.getKey()) + " | " + String.valueOf(value.getValue() + "\n");
+                    outputStream.write(text.getBytes());
+                }
+
+            } catch (IOException e) {
+                Log.e("report" ,e.getMessage());
             }
-            outputStream.close();
+
         } catch (Exception ex) {
             Log.e("report" ,ex.getMessage());
         }

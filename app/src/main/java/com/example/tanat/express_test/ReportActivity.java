@@ -37,29 +37,29 @@ public class ReportActivity extends AppCompatActivity {
             File myFile = new File(Environment.getExternalStorageDirectory() +
                     File.separator + "android" + File.separator + "data" + File.separator + "com.android.express_test" + File.separator + file_name);
 
-            FileInputStream inputStream = new FileInputStream(myFile);
+            try (FileInputStream inputStream = new FileInputStream(myFile)) {
             /*
              * Буфферезируем данные из выходного потока файла
              */
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             /*
              * Класс для создания строк из последовательностей символов
              */
-            StringBuilder stringBuilder = new StringBuilder();
-            try {
-                /*
-                 * Производим построчное считывание данных из файла в конструктор строки,
-                 * Псоле того, как данные закончились, производим вывод текста в TextView
-                 */
-                while ((line = bufferedReader.readLine()) != null){
+                StringBuilder stringBuilder = new StringBuilder();
+             /*
+             * Производим построчное считывание данных из файла в конструктор строки,
+             * Псоле того, как данные закончились, производим вывод текста в TextView
+             */
+                while ((line = bufferedReader.readLine()) != null) {
                     stringBuilder.append(line).append("\n");
                 }
                 text_report.setText(stringBuilder);
 
-            } catch (Exception e) {
+            } catch (IOException e) {
                 text_report.setText("Серьезные неполадки");
             }
-        } catch (FileNotFoundException e) {
+
+        } catch (Exception e) {
             text_report.setText("Отчет ещё не создан");
         }
     }
