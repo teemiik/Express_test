@@ -48,7 +48,8 @@
 
         <activity android:name=".InterfaceWBG" />
         <activity android:name=".SensorATB" />
-        <activity android:name=".ReportActivity"></activity>
+        <activity android:name=".ReportActivity" />
+        <activity android:name=".CPUActivity"></activity>
     </application>
 
 </manifest>
