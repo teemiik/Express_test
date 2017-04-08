@@ -24,5 +24,6 @@
     <string name="bluet_on">Bluetooth работает</string>
     <string name="bluet_off">Bluetooth не работает</string>
     <string name="no_sensor">Данный сенсор отсутствует</string>
+    <string name="b_cpu">Вычислить</string>
 
 </resources>
