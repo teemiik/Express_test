@@ -22,17 +22,20 @@
         android:id="@+id/b_cpu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="46dp"
+        android:layout_marginTop="93dp"
         android:text="@string/b_cpu"
         android:layout_below="@+id/e_cpu"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignEnd="@+id/e_cpu" />
 
     <TextView
         android:id="@+id/t_cpu"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignStart="@+id/e_cpu"
-        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="TextView"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:layout_below="@+id/b_cpu"
+        android:layout_alignStart="@+id/e_cpu"
+        android:layout_marginStart="54dp"
+        android:layout_marginTop="45dp" />
+
 </RelativeLayout>
