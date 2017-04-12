@@ -1,5 +1,7 @@
 package com.example.tanat.express_test;
 
+import android.os.CountDownTimer;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,7 +18,8 @@ public class CPUActivity extends AppCompatActivity implements View.OnClickListen
     TextView t_cpu;
     EditText e_cpu;
     BigInteger pi;
-    int z_pi;
+    long time;
+    Thread chudnovsky, timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,48 +32,84 @@ public class CPUActivity extends AppCompatActivity implements View.OnClickListen
 
         b_cpu.setOnClickListener(this);
 
-        chudnovsky.start();
-
-
+        chudnovsky = new Thread(run_chudnovsky);
+        timer = new Thread(run_timer);
     }
 
     @Override
     public void onClick(View v) {
         try {
-            z_pi = Integer.parseInt(String.valueOf(e_cpu.getText()));
-            chudnovsky.run();
+            //z_pi = Integer.parseInt(String.valueOf(e_cpu.getText()));
+            if(timer.getState() == Thread.State.NEW){
+                chudnovsky.start();
+                timer.start();
+            } else {
+                chudnovsky = new Thread(run_chudnovsky);
+                timer = new Thread(run_timer);
+                chudnovsky.start();
+                timer.start();
+            }
+
         }
         catch (Exception e) {
                 Log.e("report" ,e.getMessage());
             }
     }
 
+    Runnable run_chudnovsky = new Runnable() { // описываем объект Runnable в конструкторе
+        int k = 1;
+        public void run() {
+           // final long st = System.nanoTime();
+            try {
+                while (time != 1) {
+                   /* if (Integer.parseInt(String.valueOf(e_cpu.getText())) == 0) {
+                        pi_chudnovsky(new BigInteger(String.valueOf(10)).pow(z_pi));
+                    } else {*/
+                        pi = pi_chudnovsky(new BigInteger(String.valueOf(10 * 10)).pow(k));
+                   // }
+                    k++;
 
-    Thread chudnovsky = new Thread( // создаём новый поток
-            new Runnable() { // описываем объект Runnable в конструкторе
-                public void run() {
-                    final long st = System.nanoTime();
-                    try {
-                        if (Integer.parseInt(String.valueOf(e_cpu.getText())) == 0) {
-                            pi_chudnovsky(new BigInteger(String.valueOf(10)).pow(z_pi));
-                        } else {
-                            pi_chudnovsky(new BigInteger(String.valueOf(10 * 10)).pow(z_pi));
+                    // final long fin = System.nanoTime();
+                    // правильный вывод в View
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            //t_cpu.setText(String.format("%,12d", fin - st) + "ns");
+                            t_cpu.setText(String.valueOf(k));
                         }
-                        final long fin = System.nanoTime();
-                        // правильный вывод в View
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                t_cpu.setText(String.format("%,12d", fin - st) + "ns");
-                            }
-                        });
-                    }
-                    catch (Exception e) {
-                        Log.e("report" ,e.getMessage());
-                    }
+                    });
                 }
             }
-    );
+            catch (Exception e) {
+                Log.e("report" ,e.getMessage());
+            }
+        }
+    };
+
+    Runnable run_timer = new Runnable() { // описываем объект Runnable в конструкторе
+        public void run() {
+            Looper.prepare();
+            try {
+                new CountDownTimer(15000, 1000) {
+
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        time = millisUntilFinished / 1000;
+                    }
+
+                    @Override
+                    public void onFinish() {
+                      //  time = 15;
+                    }
+                }.start();
+            }
+            catch (Exception e) {
+                Log.e("report" ,e.getMessage());
+            }
+            Looper.loop();
+        }
+    };
+
 
     /*public long pi_chudnovsky(int val) {
         int k = 1;
