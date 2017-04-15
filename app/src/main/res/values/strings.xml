@@ -26,4 +26,6 @@
     <string name="no_sensor">Данный сенсор отсутствует</string>
     <string name="b_cpu">Вычислить</string>
 
+    <string name="title_activity_sound">SoundActivity</string>
+
 </resources>

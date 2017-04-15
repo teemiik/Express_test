@@ -8,11 +8,10 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.provider.Settings.Secure;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,29 +19,25 @@ import android.telephony.PhoneStateListener;
 import android.telephony.SignalStrength;
 import android.telephony.TelephonyManager;
 import android.widget.TextView;
-import android.telephony.CellSignalStrength;
-import android.os.Parcelable;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 import android.telephony.CarrierConfigManager;
 
 public class InterfaceWBG extends AppCompatActivity {
 
     WifiManager wifiManager;
     WifiInfo wifiInfo;
-    TextView t_wifi, t_bluetoth, tvGPS,tvDBM,tvNetworkType;
+    TextView t_wifi, t_bluetoth, tvGPS,tvDBM,tvNetworkType,tvInfo;
     BluetoothAdapter bluetooth;
-    int signal_s, signal_a = 0, col_web = 0;
+    int signal_s, signal_a = 0, col_web = 0,mSignalStrength = 0;
     String b_address;
-    TelephonyManager mTelephonyManager;
+    TelephonyManager mTelephonyManager,s2;
+    public String s23;
     CarrierConfigManager mTelephonyManager2;
     MyPhoneStateListener mPhoneStatelistener,mPhoneStatelistener2;
-    int mSignalStrength = 0;
-
     private LocationManager locationManager;
-    StringBuilder sbGPS = new StringBuilder();
-    StringBuilder sbNet = new StringBuilder();
+    //StringBuilder sbGPS = new StringBuilder();
+    //StringBuilder sbNet = new StringBuilder();
 
 
 
@@ -57,17 +52,40 @@ public class InterfaceWBG extends AppCompatActivity {
         tvNetworkType = (TextView) findViewById(R.id.tvNetworkType);
 
 
+
+       //s2 = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        tvInfo = (TextView) findViewById(R.id.tvInfo);
+       // s23 = s2.getDeviceId().toString();
+        //info.setText(s2.getDeviceId().toString());
+       // info.setText(s23);
+
+
+
+
+
+
+
+
+
         mPhoneStatelistener = new MyPhoneStateListener();
         mTelephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         mTelephonyManager.listen(mPhoneStatelistener, PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
-
-        //mPhoneStatelistener2 = new MyPhoneStateListener();
         mTelephonyManager2 = (CarrierConfigManager)  getSystemService(Context.CARRIER_CONFIG_SERVICE);
-       // mTelephonyManager2.listen(mPhoneStatelistener, PhoneStateListener.);
 
 
 
-
+        s2 = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        StringBuilder info = new StringBuilder();
+        info.append("\n\nPhone Info:\n");
+        info.append("\nModell: ");
+        info.append(Build.MODEL);
+        info.append("\nDevice Id: ");
+       // info.append(s2.getDeviceId());
+        info.append("\nSubscriber Id: ");
+       // info.append(s2.getSubscriberId());
+        info.append("\nDevice SofwareVersion: ");
+       // info.append(s2.getDeviceSoftwareVersion());
+        tvInfo.setText(info);
 
 
 
@@ -82,7 +100,6 @@ public class InterfaceWBG extends AppCompatActivity {
         }
 
         bluetooth= BluetoothAdapter.getDefaultAdapter();
-
         t_wifi = (TextView) findViewById(R.id.t_wi_fi);
         t_bluetoth = (TextView) findViewById(R.id.t_bluetoth);
         tvGPS = (TextView) findViewById(R.id.tvGPS);
@@ -146,6 +163,7 @@ public class InterfaceWBG extends AppCompatActivity {
                 LocationManager.NETWORK_PROVIDER)) {
             tvGPS.setText(formatLocation(location)+ " NET");
 
+
         }
     }
 
@@ -175,8 +193,6 @@ public class InterfaceWBG extends AppCompatActivity {
         locationManager.removeUpdates(locationListener);
     }
 
-
-    //слушатель координат с 3 состояниями по сути ебула полнейшая, потом исправлю
     private LocationListener locationListener = new LocationListener() {
 
         @Override
@@ -218,23 +234,21 @@ public class InterfaceWBG extends AppCompatActivity {
                 .isProviderEnabled(LocationManager.NETWORK_PROVIDER));
     }*/
 
-    //в душе не чаю как это работает, но работает и это прекрасно. Не трогать. Warning! I don't know
-    // how is it work.
     class MyPhoneStateListener extends PhoneStateListener {
 
         @Override
         public void onSignalStrengthsChanged(SignalStrength signalStrength) {
             super.onSignalStrengthsChanged(signalStrength);
             mSignalStrength = signalStrength.getGsmSignalStrength();
-            //mSignalStrength = signalStrength.getCdmaDbm();
             mSignalStrength = (2 * mSignalStrength) - 113; // -> dBm
-
-
             tvDBM.setText("Stats " +mSignalStrength);
 
 
 
+
             int networkType = mTelephonyManager.getNetworkType();
+
+
             String suka = CarrierConfigManager.KEY_CARRIER_VOLTE_TTY_SUPPORTED_BOOL;
             switch (networkType) {
                 case TelephonyManager.NETWORK_TYPE_GPRS:
@@ -257,6 +271,21 @@ public class InterfaceWBG extends AppCompatActivity {
                     tvNetworkType.setText("2g/3g/4g LTE is Supported");
 
                        tvNetworkType.setText(suka);
+                   /* StringBuilder info = new StringBuilder();
+                    info.append("\n\nPhone Info:\n");
+                    info.append("\nModell: ");
+                    info.append(Build.MODEL);
+                    info.append("\nDevice Id: ");
+                    info.append(mTelephonyManager.getDeviceId());
+                    info.append("\nSubscriber Id: ");
+                    info.append(mTelephonyManager.getSubscriberId());
+                    info.append("\nDevice SofwareVersion: ");
+                    info.append(mTelephonyManager.getDeviceSoftwareVersion());
+                    tvInfo.setText(info);*/
+
+                  //  TelephonyManager suka2 = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+                   // tvInfo.setText(suka2.getDeviceId());
+
 
                 //default:
                   //  tvNetworkType.setText("Not found");

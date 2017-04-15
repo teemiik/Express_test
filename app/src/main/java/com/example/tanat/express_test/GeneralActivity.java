@@ -35,7 +35,7 @@ public class GeneralActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.vibor_express) {
-            Intent intent = new Intent(this, CPUActivity.class);
+            Intent intent = new Intent(this, SoundActivity.class);
             startActivity(intent);
         }
         else if (v.getId() == R.id.b_report) {

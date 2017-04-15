@@ -16,7 +16,7 @@ public class SensorATB extends AppCompatActivity {
     private float p_light = -1, p_prox = -1;
     private boolean light = false, prox = false;
     Sensor v_sensor;
-    TextView t_light, t_PROXIMITY, t_PRESSURE, t_AMBIENT_TEMPERATURE;
+    TextView t_light, t_PROXIMITY, t_PRESSURE, t_AMBIENT_TEMPERATURE,t_gyro, t_accelerator,t_magnetto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,9 @@ public class SensorATB extends AppCompatActivity {
         t_PROXIMITY = (TextView) findViewById(R.id.t_PROXIMITY);
         t_PRESSURE = (TextView) findViewById(R.id.t_PRESSURE);
         t_AMBIENT_TEMPERATURE = (TextView) findViewById(R.id.t_AMBIENT_TEMPERATURE);
+        t_gyro= (TextView) findViewById(R.id.t_gyro);
+        t_accelerator = (TextView)findViewById(R.id.t_accelerator);
+        t_magnetto = (TextView)findViewById(R.id.t_magnetto);
 
 
         for (Sensor sensor : sensorList) {
@@ -47,6 +50,27 @@ public class SensorATB extends AppCompatActivity {
                         sensorManager.registerListener(listenerSensorPressure, v_sensor,
                                 SensorManager.SENSOR_DELAY_NORMAL);
             } else {t_PRESSURE.setText(R.string.no_sensor);}
+            if (sensor.getType() == Sensor.TYPE_GYROSCOPE) {
+                v_sensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+                sensorManager.registerListener(listenerSensorGyro, v_sensor,
+                        SensorManager.SENSOR_DELAY_NORMAL);
+            } else {t_gyro.setText(R.string.no_sensor);}
+
+            if (sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+                v_sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+                sensorManager.registerListener(listenerSensorAccelerator, v_sensor,
+                        SensorManager.SENSOR_DELAY_NORMAL);
+            } else {t_accelerator.setText(R.string.no_sensor);}
+
+            if (sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
+                v_sensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+
+                sensorManager.registerListener(listenerSensorMagnetto, v_sensor,
+                        SensorManager.SENSOR_DELAY_NORMAL);
+            } else {t_magnetto.setText(R.string.no_sensor);}
+
+
+
             if (sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE) {
                         v_sensor = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
                         sensorManager.registerListener(listenerSensorAmbient, v_sensor,
@@ -62,6 +86,10 @@ public class SensorATB extends AppCompatActivity {
         sensorManager.unregisterListener(listenerSensorProximity, v_sensor);
         sensorManager.unregisterListener(listenerSensorPressure, v_sensor);
         sensorManager.unregisterListener(listenerSensorAmbient, v_sensor);
+        sensorManager.unregisterListener(listenerSensorGyro, v_sensor);
+        sensorManager.unregisterListener(listenerSensorAccelerator, v_sensor);
+        sensorManager.unregisterListener(listenerSensorMagnetto, v_sensor);
+
     }
 
     //свет
@@ -148,4 +176,49 @@ public class SensorATB extends AppCompatActivity {
             t_AMBIENT_TEMPERATURE.setText(String.valueOf(event.values[0]));
         }
     };
+
+
+    //Гироскоп
+    SensorEventListener listenerSensorGyro = new SensorEventListener() {
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        }
+
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            t_gyro.setText( "Работает исправно " + String.valueOf(event.values[0]));
+        }
+    };
+
+
+    //Акселерометр
+    SensorEventListener listenerSensorAccelerator = new SensorEventListener() {
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        }
+
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            t_accelerator.setText("Работает исправно " + String.valueOf(event.values[0]));
+        }
+    };
+
+
+
+    //Датчик магнитных полей
+    SensorEventListener listenerSensorMagnetto= new SensorEventListener() {
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        }
+
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            t_magnetto.setText("Работает исправно " + String.valueOf(event.values[0]));
+
+        }
+    };
+
 }
